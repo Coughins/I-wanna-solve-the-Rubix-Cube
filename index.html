@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>I Wanna Solve the Rubix Cube</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      font-family: Consolas, "Cascadia Mono", ui-monospace, monospace;
+      background: #0a0b10;
+      color: #d6dce4;
+      background-image: radial-gradient(ellipse at top, #12141c 0%, #0a0b10 55%);
+    }
+    main { max-width: 760px; margin: 0 auto; padding: 48px 20px 80px; }
+    .intro { margin: 0 0 28px; }
+    .panel {
+      background: #16181e; border: 1px solid #2c3140;
+      box-shadow: 0 0 0 6px #0c0d12, 0 18px 40px #00000088;
+    }
+    .panel + .panel { margin-top: 28px; }
+    .bezel { padding: 10px; }
+    .screen {
+      background: #060c0e; border: 1px solid #2a4a46;
+      padding: 22px 22px 8px;
+    }
+    h1 { margin: 0; color: #76d6ba; font-size: 13px; letter-spacing: 0.28em; font-weight: 700; }
+    h2 { margin: 8px 0 10px; color: #e8fff6; font-size: 28px; letter-spacing: 0.04em; font-weight: 700; }
+    p.sub { margin: 0 0 18px; color: #46605c; font-size: 12px; }
+    p.copy { margin: 0 0 16px; color: #8aa8a2; font-size: 14px; line-height: 1.55; max-width: 42em; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 8px; }
+    a.btn {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #76d6ba;
+      color: #06110e;
+      text-decoration: none;
+      letter-spacing: 0.14em;
+      font-weight: 700;
+      font-size: 13px;
+      border: 1px solid #76d6ba;
+    }
+    a.btn:hover { background: #8eefd0; }
+    a.btn.ghost {
+      background: transparent;
+      color: #76d6ba;
+    }
+    a.btn.ghost:hover { background: #76d6ba22; }
+    .keys { width: 100%; border-collapse: collapse; margin: 0 0 12px; }
+    .keys td { padding: 8px; border-top: 1px solid #142422; font-size: 14px; }
+    .keys td.k { color: #76d6ba; width: 42%; letter-spacing: 0.04em; }
+    .keys td.v { color: #d6dce4; }
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; color: #46605c; font-size: 11px; letter-spacing: 0.16em; padding: 0 8px 10px; }
+    td { padding: 10px 8px; border-top: 1px solid #142422; font-size: 16px; }
+    td.rank { color: #76d6ba; width: 48px; }
+    td.time { color: #d6a248; font-variant-numeric: tabular-nums; }
+    td.moves { color: #8aa8a2; width: 72px; }
+    tr.gold td.time { color: #ffd56a; }
+    tr.silver td.time { color: #d0d7e2; }
+    tr.bronze td.time { color: #d49a6a; }
+    .empty { color: #5a6a68; text-align: center; padding: 28px 8px; }
+    footer { margin-top: 16px; color: #3a4448; font-size: 11px; line-height: 1.5; }
+    footer a { color: #46605c; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="intro">
+      <h1>SOLVE</h1>
+      <h2>I Wanna Solve the Rubix Cube</h2>
+      <p class="copy">An I Wanna fangame. Fastest solve on each mode goes on the board.</p>
+      <div class="actions">
+        <a class="btn" href="https://github.com/Coughins/I-wanna-solve-the-Rubix-Cube/releases/latest">Download for Windows</a>
+        <a class="btn ghost" href="#boards">Leaderboards</a>
+      </div>
+      <p class="sub">Windows 10+ · unzip and run · times upload automatically</p>
+    </div>
+
+    <div class="panel"><div class="bezel"><div class="screen">
+      <h1>SOLVE</h1>
+      <h2>PLAY</h2>
+      <p class="sub">Enter a name in-game. A solve posts itself.</p>
+      <table class="keys">
+        <tr><td class="k">Shift</td><td class="v">Jump</td></tr>
+        <tr><td class="k">Z</td><td class="v">Shoot</td></tr>
+        <tr><td class="k">Arrows</td><td class="v">Move / aim</td></tr>
+        <tr><td class="k">Space + arrows</td><td class="v">Turn the cube</td></tr>
+        <tr><td class="k">R</td><td class="v">New scramble</td></tr>
+        <tr><td class="k">Backspace</td><td class="v">Hub</td></tr>
+        <tr><td class="k">F4</td><td class="v">Fullscreen</td></tr>
+        <tr><td class="k">Esc</td><td class="v">Quit</td></tr>
+      </table>
+      <p class="copy">Hub has three modes: STANDARD (10 bouncing bullets), GROW (1 extra bouncing bullet per twist), BURST (50 bullets per twist). Pick a mode, inspect the cube, the first twist starts the timer, the solved cube stops it.</p>
+      <footer>Honor system. Do not treat the board as cheat-proof.</footer>
+    </div></div></div>
+
+    <div id="boards" class="intro" style="margin-top:48px">
+      <h1>SOLVE</h1>
+      <h2>Leaderboards</h2>
+      <p class="sub">Fastest cube solves. Auto-uploaded from the game. Each mode has its own board.</p>
+    </div>
+
+    <div class="panel"><div class="bezel"><div class="screen">
+      <h1>SOLVE</h1>
+      <h2>STANDARD</h2>
+      <p class="sub">Ten bouncing orbs in the chamber.</p>
+      <table>
+        <thead><tr><th>#</th><th>NAME</th><th>TIME</th><th>MOV</th></tr></thead>
+        <tbody id="rows-standard"><tr><td colspan="4" class="empty">Loading…</td></tr></tbody>
+      </table>
+      <footer>Honor system.</footer>
+    </div></div></div>
+
+    <div class="panel"><div class="bezel"><div class="screen">
+      <h1>SOLVE</h1>
+      <h2>GROW</h2>
+      <p class="sub">Each rotation adds one bouncing orb.</p>
+      <table>
+        <thead><tr><th>#</th><th>NAME</th><th>TIME</th><th>MOV</th></tr></thead>
+        <tbody id="rows-grow"><tr><td colspan="4" class="empty">Loading…</td></tr></tbody>
+      </table>
+      <footer>Honor system.</footer>
+    </div></div></div>
+
+    <div class="panel"><div class="bezel"><div class="screen">
+      <h1>SOLVE</h1>
+      <h2>BURST</h2>
+      <p class="sub">Each rotation fires a 50 bullet burst from the cube.</p>
+      <table>
+        <thead><tr><th>#</th><th>NAME</th><th>TIME</th><th>MOV</th></tr></thead>
+        <tbody id="rows-burst"><tr><td colspan="4" class="empty">Loading…</td></tr></tbody>
+      </table>
+      <footer>Honor system.</footer>
+    </div></div></div>
+
+    <footer>
+      Fan game. Not affiliated with I Wanna Be The Guy.<br />
+      Down Home Rockin by Kevin MacLeod (incompetech.com), licensed under CC BY 3.0.<br />
+      <a href="https://github.com/Coughins/I-wanna-solve-the-Rubix-Cube/releases/latest">Latest release</a>
+    </footer>
+  </main>
+  <script>
+    const API = "https://iwannasolve.pages.dev/api/times";
+    const MODES = [
+      { id: "standard", empty: "No STANDARD solves yet." },
+      { id: "grow", empty: "No GROW solves yet." },
+      { id: "burst", empty: "No BURST solves yet." }
+    ];
+
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function formatTime(us) {
+      const cs = Math.floor(Math.max(0, Number(us) || 0) / 10000);
+      const m = Math.floor(cs / 6000);
+      const s = Math.floor(cs / 100) % 60;
+      const c = cs % 100;
+      const pad = (n) => String(n).padStart(2, "0");
+      if (m > 0) return m + ":" + pad(s) + "." + pad(c);
+      return s + "." + pad(c);
+    }
+
+    function modeOf(r) {
+      const s = String(r && r.mode ? r.mode : "standard").toLowerCase();
+      return (s === "grow" || s === "burst") ? s : "standard";
+    }
+
+    function fillBoard(mode, runs) {
+      const body = document.getElementById("rows-" + mode.id);
+      const rows = runs.filter((r) => modeOf(r) === mode.id)
+        .sort((a, b) => a.time_us - b.time_us || (a.at || 0) - (b.at || 0));
+      if (!rows.length) {
+        body.innerHTML = '<tr><td colspan="4" class="empty">' + mode.empty + "</td></tr>";
+        return;
+      }
+      body.innerHTML = rows.map((r, i) => {
+        const medal = i === 0 ? "gold" : i === 1 ? "silver" : i === 2 ? "bronze" : "";
+        const time = r.time || formatTime(r.time_us);
+        return '<tr class="' + medal + '"><td class="rank">' + (i + 1) + '</td><td class="name">' +
+          escapeHtml(r.name || "Player") + '</td><td class="time">' + escapeHtml(time) +
+          '</td><td class="moves">' + (Number(r.moves) || 0) + "</td></tr>";
+      }).join("");
+    }
+
+    fetch(API)
+      .then((r) => r.json())
+      .then((data) => {
+        const runs = Array.isArray(data.runs) ? data.runs : [];
+        MODES.forEach((mode) => fillBoard(mode, runs));
+      })
+      .catch(() => {
+        MODES.forEach((mode) => {
+          document.getElementById("rows-" + mode.id).innerHTML =
+            '<tr><td colspan="4" class="empty">Could not load times.</td></tr>';
+        });
+      });
+  </script>
+</body>
+</html>
